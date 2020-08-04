@@ -1,8 +1,8 @@
-import {Component, OnInit} from "@angular/core";
-import {BehaviorSubject, defer, interval, Observable, Subscription, timer} from "rxjs";
-import {UnsubscribeMixin} from "../../../shared/utils/unsubscribe-mixin";
-import {map, reduce, share, take, takeUntil, tap, withLatestFrom} from "rxjs/operators";
-import {filter} from "rxjs/operators";
+import { Component, OnInit } from "@angular/core";
+import { Subscription, timer } from "rxjs";
+import { UnsubscribeMixin } from "../../../shared/utils/unsubscribe-mixin";
+import { takeUntil } from "rxjs/operators";
+import { filter } from "rxjs/operators";
 
 @Component({
   selector: "app-timer-component",
@@ -36,7 +36,7 @@ export class TimerComponent extends UnsubscribeMixin() {
 
   private startAction() {
     this.isPaused = false;
-    let source = timer(this.isPaused ? 0 : 1000, this.isPaused ? 0 : 1000);
+    let source = timer(0, 1000);
     this.sub = source
       .pipe(
         takeUntil(this.destroy$),
