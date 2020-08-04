@@ -1,0 +1,46 @@
+<div class="container">
+  <div
+    class="row flex-column align-items-center justify-content-center my-5 py-3 bg-light"
+  >
+    <h3 class="text-center mb-2">Simple Timer</h3>
+    <div
+      class="col-md-6 p-2 rounded d-flex justify-content-center align-items-center"
+    >
+      <div class="border rounded bg-light font-weight-bold p-2 mx-2">
+        {{ hoursDisplay ? hoursDisplay : "00" }}
+      </div>
+      :
+      <div class="border rounded bg-transparent font-weight-bold p-2 mx-2">
+        {{ minutesDisplay && minutesDisplay <= 59 ? minutesDisplay : "00" }}
+      </div>
+      :
+      <div class="border rounded bg-transparent font-weight-bold p-2 mx-2">
+        {{ secondsDisplay && secondsDisplay <= 59 ? secondsDisplay : "00" }}
+      </div>
+    </div>
+    <div
+      class="col-md-6 d-flex flex-column flex-md-row justify-content-between"
+    >
+      <button
+        class="btn"
+        [ngClass]="timerState ? 'btn-danger' : 'btn-success'"
+        (click)="timerActions()"
+        [innerHTML]="timerState ? 'Stop ' : 'Start'"
+      ></button>
+      <button
+        class="btn btn-warning my-md-0 my-2"
+        [disabled]="!timerState"
+        (dblclick)="pauseAction()"
+      >
+        Pause
+      </button>
+      <button
+        class="btn btn-warning my-md-0 my-2"
+        [disabled]="!timerState"
+        (click)="resetAction()"
+      >
+        Reset
+      </button>
+    </div>
+  </div>
+</div>
