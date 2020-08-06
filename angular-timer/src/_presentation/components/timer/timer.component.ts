@@ -11,6 +11,7 @@ import { filter } from "rxjs/operators";
 })
 export class TimerComponent extends UnsubscribeMixin() {
   ticks = 0;
+  clicks = 0;
   minutesDisplay: number = 0;
   hoursDisplay: number = 0;
   secondsDisplay: number = 0;
@@ -40,6 +41,7 @@ export class TimerComponent extends UnsubscribeMixin() {
     this.sub = source
       .pipe(
         takeUntil(this.destroy$),
+
         filter(() => this.isPaused === false)
       )
       .subscribe((time) => {
@@ -58,7 +60,11 @@ export class TimerComponent extends UnsubscribeMixin() {
   }
 
   public pauseAction() {
-    this.isPaused = !this.isPaused;
+    this.clicks++;
+    setTimeout(() => {
+      this.clicks = 0;
+    }, 300);
+    this.isPaused = this.clicks === 2 ? !this.isPaused : this.isPaused;
   }
 
   private getSeconds(ticks: number) {
